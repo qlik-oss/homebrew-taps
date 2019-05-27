@@ -5,7 +5,7 @@ class QlikCorectl < Formula
   sha256 "e0c33093936218932031cbaa3135efe84506cbb7a4a54dacefda299179381301"
 
   bottle do
-    root_url "https://github.com/qlik-oss/homebrew-taps/bottles"
+    root_url "https://github.com/qlik-oss/homebrew-taps/tree/master/bottles"
     sha256 "3183bb78b19c0bf964d87b3256f560f8f2878b8a1e8b48b06925723531b1c69e" => :mojave
     sha256 "4e4b9e1f723a8169d68aac026cb1b2eea1c622654ddf83ad4402223a4432bc00" => :x86_64_linux
   end
