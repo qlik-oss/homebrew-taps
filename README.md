@@ -16,3 +16,8 @@ After the tap is tapped, you can easily install any formula present in this repo
 brew install qlik-corectl
 ```
 And voilà! It is installed.
+
+## Bottling
+We can put our bottles in [bottles](bottles). This is not an ideal solution
+as new bottles will be added for each release and we might want to look into
+either purging the repo of old bottles or hosting them on bintray or something.

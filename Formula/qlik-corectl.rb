@@ -5,12 +5,12 @@ class QlikCorectl < Formula
   sha256 "e0c33093936218932031cbaa3135efe84506cbb7a4a54dacefda299179381301"
 
   bottle do
-    root_url "https://github.com/qlik-oss/corectl/releases/download/v1.1.1/"
-    sha256 "aecdcc0f34027f8949aeadd946fc71a2b2ca1cef5759a63c2203c1279c193719" => :mojave
-    sha256 "c51d81ffe8566f44bde50235a9d4429b3c8edd520aeaecb67adf944a993d76fb" => :x86_64_linux
+    root_url "https://github.com/qlik-oss/homebrew-taps/raw/master/bottles"
+    sha256 "3183bb78b19c0bf964d87b3256f560f8f2878b8a1e8b48b06925723531b1c69e" => :mojave
+    sha256 "4e4b9e1f723a8169d68aac026cb1b2eea1c622654ddf83ad4402223a4432bc00" => :x86_64_linux
   end
 
-  depends_on "go" => [:build, "1.11"]
+  depends_on "go" => [:build]
 
   def install
     system "go build -ldflags \"-X main.version=#{version}\""
