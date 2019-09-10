@@ -1,13 +1,10 @@
 class QlikCorectl < Formula
   desc "Corectl is a CLI tool for using Qlik Associative Engine"
   homepage "https://github.com/qlik-oss/corectl"
-  url "https://github.com/qlik-oss/corectl/archive/v1.2.0.tar.gz"
-  sha256 "8fe794bcc59c511e8f07d7cb728bb3bce8283fe4fac23f6347a65c28a9a88856"
-
-  depends_on "go" => [:build]
+  url "https://github.com/qlik-oss/corectl/releases/download/v1.3.0/corectl-Darwin-x86_64.tar.gz"
+  sha256 "a5eb168d0bf79671c238557a65cfa882479955c6de2903784e1185a18ab64c40"
 
   def install
-    system "go build -ldflags \"-X main.version=#{version}\""
     bin.install "corectl"
   end
 
