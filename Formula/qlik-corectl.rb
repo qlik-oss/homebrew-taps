@@ -2,16 +2,16 @@
 class QlikCorectl < Formula
   desc "corectl is a CLI tool for using Qlik Associative Engine."
   homepage "https://github.com/qlik-oss/corectl"
-  version "1.4.1"
+  version "1.5.2"
   bottle :unneeded
 
   if OS.mac?
-    url "https://github.com/qlik-oss/corectl/releases/download/v1.4.1/corectl-Darwin-x86_64.tar.gz"
-    sha256 "1c4573cb89dbedae0b70ae86bfa1328bbb6b576d723fe1fee8fa6cb9221b0611"
+    url "https://github.com/qlik-oss/corectl/releases/download/v1.5.2/corectl-Darwin-x86_64.tar.gz"
+    sha256 "8e4e099854e4fdee44de4bf17aa1636898d2bcaab735cac9659bb2ac5ec71537"
   elsif OS.linux?
     if Hardware::CPU.intel?
-      url "https://github.com/qlik-oss/corectl/releases/download/v1.4.1/corectl-Linux-x86_64.tar.gz"
-      sha256 "fca420f3bbc1c80a342666a8e09743465d6ff0a12532b4720b59b76d7ecbdefd"
+      url "https://github.com/qlik-oss/corectl/releases/download/v1.5.2/corectl-Linux-x86_64.tar.gz"
+      sha256 "789473ed60bdd09f7d3c8b4dcdd7751893cc69318e027be375af84d030d16129"
     end
   end
 
