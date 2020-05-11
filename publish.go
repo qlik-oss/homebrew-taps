@@ -1,3 +1,5 @@
+// This package is used to patch release of private repositories, pulling the assets that
+// should be used by brew into this repo. It is used for `qlik-cli`.
 package main
 
 import (
