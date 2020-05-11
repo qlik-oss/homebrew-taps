@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -67,6 +68,8 @@ func patchFormula() {
 	fmt.Fprintln(os.Stderr, "Patching formula")
 	formula := "./Formula/qlik-cli.rb"
 	data, err := ioutil.ReadFile(formula)
+	re := regexp.MustCompile(`\s+homepage.+`)
+	data = re.ReplaceAll(data, []byte{})
 	check(err)
 	old := strings.Replace(repo, "api.", "", 1)
 	old = strings.Replace(old, "/repos", "", 1)
