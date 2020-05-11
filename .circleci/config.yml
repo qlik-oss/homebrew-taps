@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  publish:
+    working_directory: ~/homebrew-taps
+    docker:
+      - image: circleci/golang:1.14
+    steps:
+      - checkout
+      - run:
+          name: Pull releases and patch formula
+          command: go run publish.go
+      - run:
+          name: Commit changes
+          command: |
+            git add -A
+            git commit -m "Patch qlik-cli release"
+            git push

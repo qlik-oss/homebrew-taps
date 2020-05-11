@@ -16,6 +16,7 @@ import (
 const path = "./bin/qlik-cli/"
 
 var token string
+var repo string
 
 type Release struct {
 	AssetsURL string `json:"assets_url"`
@@ -33,8 +34,11 @@ func main() {
 	if token == "" {
 		check(fmt.Errorf("GITHUB_TOKEN not set"))
 	}
-	base := "https://api.github.com/repos/qlik-trial/qlik-cli"
-	req, err := http.NewRequest("GET", base+"/releases", nil)
+	repo = os.Getenv("REPO_API_URL")
+	if repo == "" {
+		check(fmt.Errorf("REPO_API_URL not set, should be 'https://api.github.com/repos/:org/:repo'"))
+	}
+	req, err := http.NewRequest("GET", repo+"/releases", nil)
 	check(err)
 
 	req.Header.Set("Authorization", "token "+token)
@@ -64,10 +68,12 @@ func patchFormula() {
 	formula := "./Formula/qlik-cli.rb"
 	data, err := ioutil.ReadFile(formula)
 	check(err)
-	old := []byte("https://github.com/qlik-trial/qlik-cli/releases/download")
+	old := strings.Replace(repo, "api.", "", 1)
+	old = strings.Replace(old, "/repos", "", 1)
+	old += "/releases/download"
 	new := []byte("https://raw.githubusercontent.com/qlik-oss/homebrew-taps/publish-experiments/bin/qlik-cli")
-	data = bytes.Replace(data, old, new, -1)
-	check(ioutil.WriteFile(formula + ".bak", data, 0644))
+	data = bytes.Replace(data, []byte(old), new, -1)
+	check(ioutil.WriteFile(formula, data, 0644))
 }
 
 func (r *Release) present() bool {
