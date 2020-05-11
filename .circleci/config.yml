@@ -15,3 +15,16 @@ jobs:
             git add -A
             git commit -m "Patch qlik-cli release"
             git push
+  foo:
+    docker:
+      - image: circleci/alpine:latest
+    steps:
+      - run:
+          name: Dummy step
+          command: echo "Foo"
+
+workflows:
+  version: 2
+    dummy:
+      jobs:
+        - foo
