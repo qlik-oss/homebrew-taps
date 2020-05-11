@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -10,7 +11,7 @@ import (
 	"strings"
 )
 
-const path = "bin/qlik-cli/"
+const path = "./bin/qlik-cli/"
 
 var token string
 
@@ -52,6 +53,19 @@ func main() {
 			fmt.Fprintln(os.Stderr, "present")
 		}
 	}
+
+	patchFormula()
+}
+
+func patchFormula() {
+	fmt.Fprintln(os.Stderr, "Patching formula")
+	formula := "./Formula/qlik-cli.rb"
+	data, err := ioutil.ReadFile(formula)
+	check(err)
+	old := []byte("https://github.com/qlik-trial/qlik-cli/releases/download")
+	new := []byte("https://raw.githubusercontent.com/qlik-oss/homebrew-taps/publish-experiments/bin/qlik-cli")
+	data = bytes.Replace(data, old, new, -1)
+	check(ioutil.WriteFile(formula + ".bak", data, 0644))
 }
 
 func (r *Release) present() bool {
