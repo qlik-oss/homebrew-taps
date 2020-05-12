@@ -17,3 +17,20 @@ jobs:
               (git add -A && \
               git commit -m "Publish qlik-cli release" && \
               git push)
+  test:
+    docker:
+      - image: circleci/golang:1.14
+    steps:
+      - run:
+          name: Placeholder
+          command: |
+            echo "This is a placeholder as having a workflow is mandatory."
+
+workflows:
+  placeholder:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only:
+                - /asd/
