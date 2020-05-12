@@ -1,5 +1,17 @@
 // This package is used to patch release of private repositories, pulling the assets that
 // should be used by brew into this repo. It is used for `qlik-cli`.
+// Run it with:
+//
+//   go run publish.go
+//
+// and note that it requires two envorinment variables.
+//
+//   GITHUB_TOKEN - a Personal Access Token with repo rights and possibly sso.
+//   REPO_API_URL - the URL used to access the repo from the Github API, should look something
+//		    like this:  https://api.github.com/repos/:org/:repo
+//
+// Also note, this program will be triggered by a CircleCI job (which will most likely be triggered
+// remotely).
 package main
 
 import (
@@ -30,6 +42,9 @@ type Asset struct {
 	Tag  string
 }
 
+// main retrieves releases from a repo, retrieves assets for those releases and downloads
+// the assets for Mac and Linux and places them in this repo. Lastly it patches the formula
+// to point towards these local files.
 func main() {
 	token = os.Getenv("GITHUB_TOKEN")
 	if token == "" {
@@ -64,6 +79,8 @@ func main() {
 	patchFormula()
 }
 
+// patchFormula replaces the present download URLs with ones pointing to this repo.
+// It also removes the 'homepage' field as it's erroneous in this case.
 func patchFormula() {
 	fmt.Fprintln(os.Stderr, "Patching formula")
 	formula := "./Formula/qlik-cli.rb"
