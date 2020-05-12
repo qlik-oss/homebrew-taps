@@ -4,6 +4,8 @@
 # If no changes are present, nothing is done.
 
 publish() {
+  echo "go run publish.go"
+  go run publish.go
   diff=$(git diff)
   if [ -z $diff ]; then
     echo "No changes found, all done."
