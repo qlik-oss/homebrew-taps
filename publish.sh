@@ -2,6 +2,7 @@
 # It is meant to be run after 'go run publish.go'
 # and push all the changes from it.
 # If no changes are present, nothing is done.
+
 publish() {
   diff=$(git diff)
   if [ -z $diff ]; then
