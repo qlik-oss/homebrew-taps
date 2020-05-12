@@ -24,11 +24,10 @@ jobs:
           command: echo "Woop"
 
 workflows:
-  version: 2
-    dummy:
-      jobs:
-        - foo:
-            filters:
-              tags:
-                only:
-                  - /v.*/
+  dummy:
+    jobs:
+      - foo:
+        filters:
+          tags:
+            only:
+              - /v.*/
