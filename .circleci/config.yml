@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Dummy Test
           command: echo "It worked!"
-  trigger:
+  trig:
     docker:
       - image: circleci/golang:1.14
     steps:
@@ -37,7 +37,7 @@ jobs:
 workflows:
   dummy:
     jobs:
-      - foo:
+      - trig:
           filters:
             tags:
               only:
