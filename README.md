@@ -11,12 +11,8 @@ To tap this tap just run
 ```
 brew tap qlik-oss/taps
 ```
-After the tap is tapped, you can easily install any formula present in this repo, corectl or qlik-cli:
+After the tap is tapped, you can easily install any formula present in this repo, e.g. corectl:
 ```
 brew install qlik-corectl
-brew install qlik-cli
 ```
 And voilà! It is installed.
-
-## Devs
-Check out the [publish.go](./publish.go) and [publish.sh](./publish.sh) files to see how to publish from private repositories.
