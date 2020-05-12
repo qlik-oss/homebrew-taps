@@ -27,4 +27,8 @@ workflows:
   version: 2
     dummy:
       jobs:
-        - foo
+        - foo:
+            filters:
+              tags:
+                only:
+                  - /v.*/
