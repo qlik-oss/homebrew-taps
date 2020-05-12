@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  publish:
+  publish: # This job will be triggered by a remote repository.
     working_directory: ~/homebrew-taps
     docker:
       - image: circleci/golang:1.14
@@ -13,32 +13,7 @@ jobs:
       - run:
           name: Commit changes
           command: |
-            git add -A
-            git commit -m "Patch qlik-cli release"
-            git push
-  test:
-    docker:
-      - image: circleci/golang:1.14
-    steps:
-      - run:
-          name: Dummy Test
-          command: echo "It worked!"
-  trig:
-    docker:
-      - image: circleci/golang:1.14
-    steps:
-      - run:
-          name: Trigger Job
-          command: |
-            echo "Triggering other job"
-            curl --fail -u ${CCI_TOKEN} \
-              -d build_parameters[CIRCLE_JOB]=test \
-              https://circleci.com/api/v1.1/project/github/qlik-oss/homebrew-taps/tree/publish-experiments
-workflows:
-  dummy:
-    jobs:
-      - trig:
-          filters:
-            tags:
-              only:
-                - /v.*/
+            (git diff --quiet --exit-code && echo "No changes found") || \\
+              (git add -A && \
+              git commit -m "Publish qlik-cli release" && \
+              git push)
