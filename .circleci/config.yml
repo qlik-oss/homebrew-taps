@@ -16,14 +16,24 @@ jobs:
             git add -A
             git commit -m "Patch qlik-cli release"
             git push
-  foo:
+  test:
     docker:
       - image: circleci/golang:1.14
     steps:
       - run:
-          name: Dummy step
-          command: echo "Woop"
-
+          name: Dummy Test
+          command: echo "It worked!"
+  trigger:
+    docker:
+      - image: circleci/golang:1.14
+    steps:
+      - run:
+          name: Trigger Job
+          command: |
+            echo "Triggering other job"
+            curl --fail -u ${CCI_TOKEN} \
+              -d build_parameters[CIRCLE_JOB]=test \
+              https://circleci.com/api/v1.1/project/github/qlik-oss/homebrew-taps/tree/publish-experiments
 workflows:
   dummy:
     jobs:
