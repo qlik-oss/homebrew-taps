@@ -1,4 +1,5 @@
-version: 2
+version: 2.1
+
 jobs:
   publish:
     working_directory: ~/homebrew-taps
@@ -27,7 +28,7 @@ workflows:
   dummy:
     jobs:
       - foo:
-        filters:
-          tags:
-            only:
-              - /v.*/
+          filters:
+            tags:
+              only:
+                - /v.*/
