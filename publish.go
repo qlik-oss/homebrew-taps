@@ -91,7 +91,7 @@ func patchFormula() {
 	old := strings.Replace(repo, "api.", "", 1)
 	old = strings.Replace(old, "/repos", "", 1)
 	old += "/releases/download"
-	new := []byte("https://raw.githubusercontent.com/qlik-oss/homebrew-taps/publish-experiments/bin/qlik-cli")
+	new := []byte("https://raw.githubusercontent.com/qlik-oss/homebrew-taps/master/bin/qlik-cli")
 	data = bytes.Replace(data, []byte(old), new, -1)
 	check(ioutil.WriteFile(formula, data, 0644))
 }
