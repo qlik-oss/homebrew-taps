@@ -21,7 +21,7 @@ jobs:
     steps:
       - run:
           name: Dummy step
-          command: echo "Foo"
+          command: echo "Woop"
 
 workflows:
   version: 2
