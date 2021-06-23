@@ -5,20 +5,20 @@
 class QlikCli < Formula
   desc "qlik-cli is a Command Line Interface for Qlik Sense SaaS."
   homepage ""
-  version "2.2.1"
+  version "2.2.2"
   bottle :unneeded
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/qlik-trial/qlik-cli/releases/download/v2.2.1/qlik-Darwin-x86_64.tar.gz"
-      sha256 "f21b2c15bfa5bd7ae2eb3a99090ba5827a53a009286723044c3a749e21357acb"
+      url "https://github.com/qlik-trial/qlik-cli/releases/download/v2.2.2/qlik-Darwin-x86_64.tar.gz"
+      sha256 "2e12d878e8e5616ab1478ffeaaa7605980ac6709d86b339f2f8b6b3c5cabc2a0"
     end
   end
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/qlik-trial/qlik-cli/releases/download/v2.2.1/qlik-Linux-x86_64.tar.gz"
-      sha256 "865d6a050aed0084ab99ae7c467fe0d3a95f978c0d4a9300e0e994fa42db815e"
+      url "https://github.com/qlik-trial/qlik-cli/releases/download/v2.2.2/qlik-Linux-x86_64.tar.gz"
+      sha256 "751ce821c9ca4436b661c6bce1e48c540e5ce0a65c77f51540eaf9e8072e72af"
     end
   end
 
