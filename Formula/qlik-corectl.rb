@@ -3,7 +3,6 @@ class QlikCorectl < Formula
   desc "corectl is a CLI tool for using Qlik Associative Engine."
   homepage "https://github.com/qlik-oss/corectl"
   version "1.5.2"
-  bottle :unneeded
 
   if OS.mac?
     url "https://github.com/qlik-oss/corectl/releases/download/v1.5.2/corectl-Darwin-x86_64.tar.gz"
