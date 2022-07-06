@@ -54,15 +54,18 @@ func main() {
 	if repo == "" {
 		check(fmt.Errorf("REPO_API_URL not set, should be 'https://api.github.com/repos/:org/:repo'"))
 	}
-	req, err := http.NewRequest("GET", repo+"/releases", nil)
+
+	releasesURL := fmt.Sprintf("%s/releases", strings.TrimRight(repo, "/"))
+	fmt.Fprintf(os.Stderr, "Fetching releases from: %q", releasesURL)
+	req, err := http.NewRequest("GET", releasesURL, nil)
 	check(err)
 
 	req.Header.Set("Authorization", "token "+token)
 
 	body := call(req)
 	b, err := ioutil.ReadAll(body)
-	body.Close()
 	check(err)
+	body.Close()
 
 	releases := []*Release{}
 	check(json.Unmarshal(b, &releases))
