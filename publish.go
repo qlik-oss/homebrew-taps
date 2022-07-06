@@ -56,7 +56,7 @@ func main() {
 	}
 
 	releasesURL := fmt.Sprintf("%s/releases", strings.TrimRight(repo, "/"))
-	fmt.Fprintf(os.Stderr, "Fetching releases from: %q", releasesURL)
+	fmt.Fprintf(os.Stderr, "Fetching releases from: %q\n", releasesURL)
 	req, err := http.NewRequest("GET", releasesURL, nil)
 	check(err)
 
@@ -124,6 +124,7 @@ func (r *Release) getAssets() {
 	check(json.Unmarshal(b, &assets))
 
 	for _, asset := range assets {
+		fmt.Fprintf(os.Stderr, "Found asset with name: %s, tag: %s, URL: %s\n", asset.Name, asset.Tag, asset.URL)
 		asset.Tag = r.Tag
 		if strings.Contains(asset.Name, "Darwin") || strings.Contains(asset.Name, "Linux") {
 			asset.download()
