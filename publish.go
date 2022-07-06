@@ -38,7 +38,7 @@ type Release struct {
 
 type Asset struct {
 	URL  string `json:"url"`
-	Name string `json"name"`
+	Name string `json:"name"`
 	Tag  string
 }
 
@@ -91,8 +91,8 @@ func patchFormula() {
 	old := strings.Replace(repo, "api.", "", 1)
 	old = strings.Replace(old, "/repos", "", 1)
 	old += "/releases/download"
-	new := []byte("https://raw.githubusercontent.com/qlik-oss/homebrew-taps/master/bin/qlik-cli")
-	data = bytes.Replace(data, []byte(old), new, -1)
+	newURL := []byte("https://raw.githubusercontent.com/qlik-oss/homebrew-taps/master/bin/qlik-cli")
+	data = bytes.Replace(data, []byte(old), newURL, -1)
 	check(ioutil.WriteFile(formula, data, 0644))
 }
 
@@ -107,12 +107,14 @@ func (r *Release) present() bool {
 func (r *Release) getAssets() {
 	err := os.MkdirAll(path+r.Tag, 0755)
 	check(err)
+
+	fmt.Fprintf(os.Stderr, "Fetching the asset from: %s\n", r.AssetsURL)
 	req, err := http.NewRequest("GET", r.AssetsURL, nil)
 	check(err)
 	req.Header.Set("Authorization", "token "+token)
 	body := call(req)
 	b, err := ioutil.ReadAll(body)
-	body.Close()
+	defer body.Close()
 	check(err)
 
 	assets := []*Asset{}
@@ -135,11 +137,10 @@ func (a *Asset) download() {
 	body := call(req)
 	file, err := os.Create(path + a.Tag + "/" + a.Name)
 	if err != nil {
-		body.Close()
 		check(err)
 	}
+	defer body.Close()
 	_, err = io.Copy(file, body)
-	body.Close()
 	check(err)
 }
 
@@ -147,7 +148,6 @@ func call(req *http.Request) io.ReadCloser {
 	res, err := http.DefaultClient.Do(req)
 	check(err)
 	if res.StatusCode != http.StatusOK {
-		res.Body.Close()
 		check(fmt.Errorf("Status: %s", res.Status))
 	}
 	return res.Body
