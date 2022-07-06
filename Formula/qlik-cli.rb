@@ -5,11 +5,11 @@
 class QlikCli < Formula
   desc "qlik-cli is a Command Line Interface for Qlik Cloud."
   homepage ""
-  version "2.14.2"
+  version "2.14.3"
 
   on_macos do
-    url "https://github.com/qlik-trial/qlik-cli/releases/download/v2.14.2/qlik-Darwin-x86_64.tar.gz"
-    sha256 "5443d7a126a2556d02f9c0be5914e3d24522b26dacf58a1443c09a0938089b14"
+    url "https://github.com/qlik-trial/qlik-cli/releases/download/v2.14.3/qlik-Darwin-x86_64.tar.gz"
+    sha256 "d5d636f0d0bc546a78ed9b4bf3e0592f1364ff2632bbc838c2070d203413f504"
 
     def install
       bin.install "qlik"
@@ -28,8 +28,8 @@ class QlikCli < Formula
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/qlik-trial/qlik-cli/releases/download/v2.14.2/qlik-Linux-x86_64.tar.gz"
-      sha256 "b023cbd13d7129b5cbe11644dfe5194679a3174f33275952177e264443f984f7"
+      url "https://github.com/qlik-trial/qlik-cli/releases/download/v2.14.3/qlik-Linux-x86_64.tar.gz"
+      sha256 "236141685fb33949fc5d34246f7d7f28402dba65a814664a2bf9acc3fb11febe"
 
       def install
         bin.install "qlik"
